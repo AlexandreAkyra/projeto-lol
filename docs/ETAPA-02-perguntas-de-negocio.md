@@ -112,7 +112,7 @@ decisão define o script da Etapa 3.
 |---|---|
 | **Categoria** | Visão |
 | **Pergunta** | Times com mais visão vencem mais? E o efeito é grande comparado ao dos objetivos? |
-| **Métrica** | Taxa de vitória (%) por faixa de diferença de *vision score* entre os times |
+| **Métrica** | **Principal:** taxa de vitória (%) do time com maior *vision score* na partida. **Secundária:** winrate por faixa de diferença de vision score (mostra se o efeito cresce com o tamanho da vantagem) |
 | **Comparação** | Entre as faixas, e contra o tamanho do efeito dos objetivos (PN01, PN03) |
 | **Fonte** | `match` |
 | **Hipótese** | chuto entre 70% a 78%, visão em league of legends é absurdamente importante, e um time com mais visão pode criar mais estrategias, e tambem um time que está na frente, geralmente impede o outro de wardar o mapa, então acredito que isso influencia MUITO a taxa de vitoria |
