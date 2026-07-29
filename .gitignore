@@ -1,0 +1,76 @@
+# =============================================================
+# .gitignore — projeto-lol
+# Regra mental: entra no Git o que é CÓDIGO e DOCUMENTAÇÃO.
+# Fica de fora o que é SEGREDO, DADO, AMBIENTE ou LIXO.
+# =============================================================
+
+# -------------------------------------------------------------
+# 1. SEGREDOS
+# Se vazar, o Git guarda no histórico para sempre — apagar o
+# arquivo depois NÃO remove dos commits antigos.
+# -------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# -------------------------------------------------------------
+# 2. DADOS
+# O Git é feito para texto pequeno, versionado linha a linha.
+# Estes arquivos são grandes, binários, e se regeneram rodando
+# o código de coleta. Versionar código, não resultado.
+#
+# Nota: ignoramos o CONTEÚDO das pastas, mas mantemos as pastas
+# no repositório via .gitkeep — assim quem clonar já recebe a
+# estrutura pronta. (O Git não versiona pasta vazia.)
+# -------------------------------------------------------------
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Rede de segurança: dados soltos fora das pastas certas
+/*.csv
+/*.parquet
+
+# -------------------------------------------------------------
+# 3. AMBIENTE
+# Tudo aqui é reconstruível com:
+#   python -m venv venv
+#   pip install -r requirements.txt
+# Versionar o venv quebraria o projeto em outro sistema
+# operacional e adicionaria milhares de arquivos.
+# -------------------------------------------------------------
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Notebooks: o checkpoint é backup automático do Jupyter,
+# não tem valor histórico.
+.ipynb_checkpoints/
+
+# -------------------------------------------------------------
+# 4. LIXO DE SISTEMA E EDITOR
+# Configuração pessoal da SUA máquina. Não interessa a quem
+# clonar, e gera conflito em trabalho colaborativo.
+# -------------------------------------------------------------
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# -------------------------------------------------------------
+# 5. TEMPORÁRIOS DO POWER BI / OFFICE
+# O .pbix final VAI para o repositório (é entregável).
+# Só os temporários ficam de fora.
+# -------------------------------------------------------------
+~$*
+*.tmp
