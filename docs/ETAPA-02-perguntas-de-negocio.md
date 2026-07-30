@@ -154,12 +154,30 @@ decisão define o script da Etapa 3.
 |---|---|
 | **Categoria** | Economia + Combate |
 | **Pergunta** | O que separa mais o vencedor do perdedor: vantagem de farm (CS/min) ou vantagem de abates? |
-| **Métrica** | Taxa de vitória (%) por faixa de diferença de CS/min **e** por faixa de diferença de abates, na mesma escala |
+| **Métrica** | Taxa de vitória (%) por faixa de diferença de CS/min **e** por faixa de diferença de abates, na mesma escala. **O CS considera apenas TOP, JUNGLE, MIDDLE e BOTTOM — o suporte (UTILITY) é excluído da conta.** |
 | **Comparação** | Entre os dois fatores |
 | **Fonte** | `match` |
 | **Hipótese** *(rascunho)* | Abates devem mostrar associação mais forte, porque geram objetivos. Mas o CS deve ser o indicador mais "honesto": farm alto é causa de vantagem, enquanto abates são parcialmente consequência dela. |
 | **Formato da resposta** | Duas curvas no mesmo gráfico, eixo X normalizado |
 | **Prioridade** | Média |
+
+> **Decisão: excluir o suporte da conta de CS.**
+>
+> Medição na amostra (CS por minuto, média por rota):
+>
+> | BOTTOM | MIDDLE | TOP | JUNGLE | **UTILITY** |
+> |---|---|---|---|---|
+> | 7,62 | 7,30 | 7,30 | 6,99 | **1,17** |
+>
+> As quatro primeiras rotas dependem de farm e ficam todas perto de 7. O suporte fica
+> em 1,17 porque **não é função dele farmar** — ele cede as tropas para o atirador.
+>
+> Manter o suporte na conta não acrescenta informação sobre vantagem de farm; apenas
+> puxa a média do time para baixo de forma igual dos dois lados, comprimindo a escala
+> e aproximando os grupos que a análise quer separar.
+>
+> Portanto, o "CS do time" no PN07 é a soma de **4 jogadores**, não 5. Como a regra
+> vale igualmente para os dois times, a comparação permanece justa.
 
 ### PN08
 

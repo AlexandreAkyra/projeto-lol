@@ -195,10 +195,50 @@ com `lane = BOTTOM` e `role = SUPPORT` — recuperáveis como `UTILITY`.
 
 ---
 
-## 5. Anotações para etapas futuras
+## 5. Atributos derivados (Etapa 6)
 
-- **Etapa 5 (limpeza):** aplicar as regras D1, D2 e D3
-- **Etapa 6 (atributos):** criar `alma_do_dragao` = `dragon.kills >= 4`
-- **Etapa 6 (atributos):** criar `cs_por_minuto` = (minions + monstros neutros) ÷ (duração em min)
+Colunas que **não existem na API** e foram criadas por decisão analítica.
+
+| Tabela | Coluna | Fórmula | Por quê |
+|---|---|---|---|
+| partidas | `duracao_minutos` | `duracao_segundos / 60` | unidade legível |
+| partidas | `faixa_duracao` | curta < 25 · média 25–35 · longa > 35 | segmentação do PN08 |
+| times | `alma_do_dragao` | `dragoes_abatidos >= 4` | regra do jogo, não é campo da API |
+| jogadores | `cs_total` | `cs_minion + cs_jungle` | CS de rota e de selva contam igual |
+| jogadores | `kda` | `(kills + assists) / max(deaths, 1)` | resumo de desempenho |
+| jogadores | `cs_por_minuto` | `cs_total / duracao_minutos` | remove o efeito da duração |
+| jogadores | `ouro_por_minuto` | `ouro / duracao_minutos` | idem |
+
+### Decisões documentadas
+
+**KDA com zero mortes.** Partidas sem morte produziriam divisão por zero. Adotamos
+a convenção de mercado: 0 mortes é tratado como 1. Isso significa que "0 mortes" e
+"1 morte" produzem o mesmo KDA.
+
+**Normalização por tempo.** `kills`, `ouro`, `cs` e `vision_score` são acumulados e
+crescem com a duração da partida. Comparar esses totais entre partidas de durações
+diferentes mede, em parte, apenas o tempo de jogo. Por isso as métricas comparativas
+usam a versão por minuto.
+
+### Distribuições observadas (4.741 partidas)
+
+| Métrica | Média | Mediana | Máx |
+|---|---|---|---|
+| KDA | 3,43 | 2,33 | 39,0 |
+| CS/min | 6,08 | 6,89 | 12,24 |
+| Ouro/min | 423 | 419 | 930 |
+
+> ⚠️ **KDA é assimétrico à direita** (média 3,43 contra mediana 2,33). Ele tem piso
+> em 0 e nenhum teto, então poucas partidas excepcionais puxam a média para cima.
+> Para descrever o jogador típico, usar **mediana**.
+
+> ⚠️ **CS/min tem duas populações.** Por rota: BOTTOM 7,62 · MIDDLE 7,30 · TOP 7,30
+> · JUNGLE 6,99 · **UTILITY 1,17**. Suporte não farma. Qualquer análise de CS precisa
+> ser segmentada por rota ou excluir o suporte — caso contrário mede apenas quantos
+> suportes há de cada lado. **Afeta diretamente o PN07.**
+
+## 6. Pendências para etapas futuras
+
+- **Etapa 9 (SQL):** o PN07 precisa ser analisado por rota (ver aviso acima)
 - **Etapa 12 (README):** documentar a mistura de patches 26.13/26.14 e a
   divergência entre numeração interna e divulgada

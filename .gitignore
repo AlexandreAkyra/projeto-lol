@@ -31,6 +31,8 @@ data/interim/*
 !data/interim/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+data/final/*
+!data/final/.gitkeep
 
 # Rede de segurança: dados soltos fora das pastas certas
 /*.csv
