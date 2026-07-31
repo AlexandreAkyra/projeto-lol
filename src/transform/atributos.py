@@ -47,19 +47,7 @@ def enriquecer_partidas(partidas):
     """Acrescenta duracao_minutos e faixa_duracao."""
     partidas = partidas.copy()   # nunca altere o DataFrame que veio de fora
 
-    # ----------------------------------------------------------------------
-    # TODO 1 — crie a coluna `duracao_minutos`
-    #          é `duracao_segundos` dividido por 60
-    # ----------------------------------------------------------------------
     partidas["duracao_minutos"] = partidas["duracao_segundos"] / 60
-
-    # ----------------------------------------------------------------------
-    # TODO 2 — crie a coluna `faixa_duracao` usando pd.cut
-    #
-    #   pd.cut(coluna, bins=[0, 25, 35, 999], labels=["curta", "media", "longa"])
-    #
-    # bins são os pontos de corte; labels são os nomes de cada faixa.
-    # ----------------------------------------------------------------------
 
     partidas["faixa_duracao"] = pd.cut(
         partidas["duracao_minutos"],
@@ -67,22 +55,15 @@ def enriquecer_partidas(partidas):
         labels=["curta", "media", "longa"],
     )      
 
-
     return partidas
 
 
 def enriquecer_times(times):
     """Acrescenta alma_do_dragao."""
     times = times.copy()
-
-    # ----------------------------------------------------------------------
-    # TODO 3 — crie a coluna `alma_do_dragao`
-    #          é True quando `dragoes_abatidos` for maior ou igual a 4
-    # ----------------------------------------------------------------------
     times['alma_do_dragao'] = times["dragoes_abatidos"] >= 4
 
     return times
-
 
 def enriquecer_jogadores(jogadores, partidas):
     """Acrescenta cs_total, kda, cs_por_minuto e ouro_por_minuto.
@@ -91,40 +72,18 @@ def enriquecer_jogadores(jogadores, partidas):
     por minuto precisam dela.
     """
     jogadores = jogadores.copy()
-
-    # ----------------------------------------------------------------------
-    # TODO 4 — crie a coluna `cs_total`
-    #          é `cs_minion` somado com `cs_jungle`
-    # ----------------------------------------------------------------------
     jogadores["cs_total"] = jogadores['cs_minion'] + jogadores['cs_jungle']
-
-    # ----------------------------------------------------------------------
-    # TODO 5 — crie a coluna `kda`
-    #          é (kills + assists) dividido por deaths, com .clip(lower=1)
-    #          no divisor para não dividir por zero
-    # ----------------------------------------------------------------------
     jogadores["kda"] = (jogadores["kills"] + jogadores["assists"]) / jogadores["deaths"].clip(lower=1)
 
-    # ----------------------------------------------------------------------
-    # TODO 6 — traga a duração da partida para dentro de `jogadores`
-    #
-    # Você quer só DUAS colunas de `partidas`: id_partida e duracao_minutos.
-    # Selecione essas duas e faça o merge com on="id_partida", how="left".
-    #
-    #   jogadores = jogadores.merge(partidas[[...]], on=..., how=...)
-    # ----------------------------------------------------------------------
     jogadores = jogadores.merge(
         partidas[["id_partida", "duracao_minutos"]],
         on="id_partida",
         how="left",
     )
 
-    # ----------------------------------------------------------------------
-    # TODO 7 — crie `cs_por_minuto` e `ouro_por_minuto`
-    #          cada uma é a coluna correspondente dividida por duracao_minutos
-    # ----------------------------------------------------------------------
     jogadores['cs_por_minuto'] = jogadores['cs_total'] / jogadores['duracao_minutos']
     jogadores['ouro_por_minuto'] = jogadores['ouro'] / jogadores['duracao_minutos']
+    
     return jogadores
 
 
