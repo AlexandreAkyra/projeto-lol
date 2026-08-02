@@ -1,0 +1,20 @@
+# =============================================================
+# .gitattributes — projeto-lol
+#
+# Windows termina linha com CRLF (\r\n), Linux e Mac com LF (\n).
+# Sem esta regra, abrir um arquivo num editor do Windows pode
+# reescrever TODAS as linhas, e o git mostra o arquivo inteiro
+# como modificado mesmo sem nenhuma mudança de conteúdo.
+#
+# `text=auto` manda o git normalizar: guarda sempre LF no
+# repositório e entrega no formato nativo de quem clonar.
+# =============================================================
+
+* text=auto
+
+# Binários: nunca converter, ou o arquivo corrompe.
+*.pbix   binary
+*.png    binary
+*.jpg    binary
+*.parquet binary
+*.xlsx   binary
