@@ -1,5 +1,5 @@
 # =============================================================
-# .gitignore — projeto-lol
+# .gitignore — lol-ranked-analysis
 # Regra mental: entra no Git o que é CÓDIGO e DOCUMENTAÇÃO.
 # Fica de fora o que é SEGREDO, DADO, AMBIENTE ou LIXO.
 # =============================================================

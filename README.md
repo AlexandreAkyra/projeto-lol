@@ -216,8 +216,8 @@ banco, onde é versionável, auditável e legível por qualquer pessoa que saiba
 [Riot Games](https://developer.riotgames.com) e Power BI Desktop (opcional).
 
 ```bash
-git clone https://github.com/AlexandreAkyra/projeto-lol
-cd projeto-lol
+git clone https://github.com/AlexandreAkyra/lol-ranked-analysis
+cd lol-ranked-analysis
 
 python -m venv venv
 venv\Scripts\activate          # Windows
@@ -343,7 +343,7 @@ a **comparação relativa entre rotas**, já que o viés afeta as cinco igualmen
 ## Estrutura do repositório
 
 ```
-projeto-lol/
+lol-ranked-analysis/
 ├── src/
 │   ├── collect/       # coleta da API (3 scripts, retomáveis)
 │   ├── transform/     # limpeza, grãos e atributos derivados
