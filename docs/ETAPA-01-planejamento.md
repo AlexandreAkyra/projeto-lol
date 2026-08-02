@@ -84,7 +84,38 @@ Formato: **o que não vamos fazer** + **por quê** + (opcional) *"fica como trab
 3. Não vamos fazer analise de serie temporal entre patches, pois deixaria o projeto muito complexo pra mim que precisa terminar rapido o projeto
 4. Não será análisado picks e bans durante a champion select, quero analisar somente o que acontece durante a partida
 5. não sera avaliado o pathing do jungle, é algo muito especifico para a pergunta principal, daria pra fazer outro projeto só pra essa lane
-6. Não vamos produzir tier list de campeões nem análise de builds/itemização. São perguntas de *meta report* ("o que as pessoas jogam"), e não de fator de vitória ("o que faz ganhar") — dariam um segundo projeto. *Fica como trabalho futuro.*
+6. ~~Não vamos produzir tier list de campeões nem análise de builds/itemização.~~
+   **REVISADO em 01/08/2026** — ver abaixo.
+
+7. Não vamos analisar **builds nem itemização**. Continua fora: exigiria mapear
+   itens por campeão e por momento da partida, o que é um projeto à parte.
+
+---
+
+### Revisão de escopo — 01/08/2026
+
+**O que muda:** a análise de campeões entra no projeto, de forma limitada.
+
+**Por quê:** o item 6 original excluía campeões inteiros por serem "meta report".
+Ao montar o dashboard ficou claro que duas perguntas específicas sobre campeões
+agregam valor sem virar um segundo projeto, e que a exclusão era ampla demais.
+
+**O que entra:**
+- Os 3 campeões com maior taxa de vitória por rota, **com no mínimo 100 partidas**
+- Os 3 campeões mais escolhidos por rota
+
+**O que continua fora:** builds, itemização e tier list completa.
+
+**Sobre o corte de 100 partidas:** ele existe porque taxa sem base engana. Um
+campeão com 80% de vitória em 30 partidas tem margem de erro de ±14 pontos — o
+valor "real" pode estar em qualquer lugar entre 66% e 94%. Com 100 partidas a
+margem cai para ±8. Não elimina o ruído, mas tira do ranking os casos em que ele
+domina o número.
+
+> **Nota de honestidade:** estas duas perguntas foram adicionadas **depois** de
+> os dados já terem sido analisados, então não têm hipótese registrada como as
+> outras oito. Isso está documentado de propósito — uma "previsão" feita agora
+> não valeria nada.
 
 ### 1.4 Critério de sucesso
 

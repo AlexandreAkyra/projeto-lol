@@ -194,6 +194,55 @@ decisão define o script da Etapa 3.
 
 ---
 
+## Perguntas acrescentadas em 01/08/2026
+
+> Estas três entraram **depois** da análise, na revisão de escopo registrada no
+> charter. Por isso **não têm hipótese** — uma previsão feita agora, com os dados
+> já vistos, não valeria nada.
+
+### PN09 — Top 3 campeões por taxa de vitória, por rota
+
+| Campo | Conteúdo |
+|---|---|
+| **Métrica** | Taxa de vitória (%) por campeão e rota, **mínimo de 100 partidas** |
+| **Por que o corte de 100** | Com 30 partidas a margem de erro é de ±14 pontos; com 100 cai para ±8. Um campeão com 80% em 30 jogos pode ter valor real entre 66% e 94% |
+| **Formato** | Barras por rota, com a contagem de partidas visível |
+| **View** | `vw_top_campeoes` |
+
+### PN10 — Top 3 campeões mais escolhidos, por rota
+
+| Campo | Conteúdo |
+|---|---|
+| **Métrica** | Contagem de partidas por campeão e rota |
+| **Sem corte mínimo** | Seria circular: se a pergunta é "quais os mais jogados", filtrar por volume já embute a resposta |
+| **View** | `vw_campeoes_mais_usados` |
+
+### PN11 — Em qual rota o desempenho individual mais pesa?
+
+**A pergunta que NÃO deu para responder:** *"qual rota tem maior taxa de vitória?"*
+
+Ela é **estruturalmente impossível**. Toda partida tem um jogador de cada rota em
+cada time — um vence, o outro perde. A taxa de vitória de qualquer rota é
+exatamente 50%, sempre. Verificado na amostra:
+
+```
+TOP 50,00%  ·  JUNGLE 50,00%  ·  MIDDLE 50,00%  ·  BOTTOM 50,00%  ·  UTILITY 50,01%
+```
+
+Coletar mais dados não mudaria nada. É uma identidade aritmética, não um achado.
+
+**A reformulação que tem resposta:**
+
+| Campo | Conteúdo |
+|---|---|
+| **Pergunta** | Em qual rota o desempenho individual mais separa quem venceu de quem perdeu? |
+| **Métrica** | Razão entre o KDA médio dos vencedores e o dos perdedores, por rota. E a vantagem percentual de ouro/min |
+| **Leitura** | Razão alta = maior peso do jogador individual. Razão baixa = maior dependência do time |
+| **Ressalva** | Parte da diferença é causalidade reversa — especialmente na selva, onde o jungler acumula assistências das jogadas do time inteiro |
+| **View** | `vw_alavancagem_rota` |
+
+---
+
 ### Cobertura e custo
 
 | Verificação | Resultado |
